@@ -8,6 +8,10 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'),
 const bodyParser = require('body-parser');
 const mongoURL = "mongodb://localhost:27017/HomeworkFinalProject";
 
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackConfig = require('./webpack.config.js');
+
 const app = express();
 
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -32,6 +36,7 @@ const connectDB = async () => {
 app.get('/api/customers', async (req, res) => {
   try {
     const result = await collection.find().toArray();
+    res.set('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
   } catch (err) {
     res.status(500);
@@ -59,6 +64,17 @@ app.post('/api/customers', async (req, res) => {
     res.end(JSON.stringify({ status: 'error' }));
   }
 });
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(webpackMiddleware(webpack(webpackConfig), {
+    publicPath: '/',
+    stats: {
+      colors: true,
+    },
+  }));
+} else {
+  app.use(express.static('dist'));
+}
 
 app.listen(PORT, () => {
   console.log(`Running on port: ${PORT}`);
