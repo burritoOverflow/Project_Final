@@ -89,6 +89,8 @@ const listCustomers = customers => {
     const deleteButton = deleteButtons[i];
     deleteButton.addEventListener('click', event => {
       deleteCustomer(deleteButton.getAttribute('customer-id'));
+      customers.splice(i, 1);
+      mainElement.innerHTML = templates.listCustomers({ customers });
     });
   }
 };
