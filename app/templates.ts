@@ -30,6 +30,15 @@ export const main = Handlebars.compile(`
   </div>
 `);
 
+export const alert = Handlebars.compile(`
+  <div class="alert alert-{{type}} alert-dismissible fade in" role="alert">
+    <button class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{message}}
+  </div>
+`);
+
 export const listCustomers = Handlebars.compile(`
   <div class="panel panel-default">
     <div class="panel-heading">Customers</div>

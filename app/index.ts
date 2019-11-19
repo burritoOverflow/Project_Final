@@ -40,13 +40,21 @@ const getCustomers = async () => {
   return customers;
 };
 
+const showAlert = (message, type = 'danger') => {
+  const alertsElement = document.body.querySelector('.customer-alerts');
+  const html = templates.alert({ type, message });
+  alertsElement.insertAdjacentHTML('beforeend', html);
+};
+
 const addCustomer = async (customer) => {
   const resBody = await postJSON('/api/customers', customer);
   if (resBody.error) {
     throw resBody.error
   }
+  showAlert(`Customer "${customer.title} ${customer.firstname} ${customer.lastname}" created!`, 'success');
   return resBody;
 };
+
 
 const listCustomers = customers => {
   const mainElement = document.body.querySelector('.customers-main');
