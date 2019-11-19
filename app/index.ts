@@ -61,6 +61,13 @@ const showAlert = (message, type = 'danger') => {
   alertsElement.insertAdjacentHTML('beforeend', html);
 };
 
+const removeAlerts = () => {
+  const alertsElement = document.body.querySelector('.customer-alerts');
+  while (alertsElement.firstChild) {
+    alertsElement.removeChild(alertsElement.firstChild);
+  }
+}
+
 const addCustomer = async (customer) => {
   const resBody = await postJSON('/api/customers', customer);
   if (resBody.error) {
@@ -134,6 +141,7 @@ const showView = async () => {
 
   switch (view) {
     case '#customers':
+      removeAlerts();
       try {
         const customers = await getCustomers();
         listCustomers(customers);
@@ -142,6 +150,7 @@ const showView = async () => {
       }
       break;
     case '#add-customer':
+      removeAlerts();
       showCustomerForm();
       break;
     default:
