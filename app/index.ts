@@ -61,13 +61,18 @@ const showCustomerForm = () => {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
+    let state = (document.getElementById("state")) as HTMLSelectElement;
+    let selectedState = state.selectedIndex;
+    let opt = state.options[selectedState];
+    let stateVal = (<HTMLOptionElement>opt).value;
+
     const customerData = {
       title: (<HTMLInputElement>form.querySelector('input[name = "title"]:checked')).value,
       firstname: (<HTMLInputElement>form.querySelector('#firstname')).value,
       lastname: (<HTMLInputElement>form.querySelector('#lastname')).value,
       street: (<HTMLInputElement>form.querySelector('#street')).value,
       city: (<HTMLInputElement>form.querySelector('#city')).value,
-      // state: document.getElementById("#state")
+      state: stateVal,
       zip: (<HTMLInputElement>form.querySelector('#zip')).value,
     }
     addCustomer(customerData);
