@@ -4,9 +4,9 @@ const express = require('express');
 const morgan = require('morgan');
 const PORT = process.env.PORT || 8000;
 const MongoClient = require('mongodb').MongoClient;
-const mongoURL = "mongodb://localhost:27017/HomeworkFinalProject";
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 const bodyParser = require('body-parser');
+const mongoURL = "mongodb://localhost:27017/HomeworkFinalProject";
 
 const app = express();
 
