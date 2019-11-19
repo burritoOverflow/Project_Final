@@ -28,8 +28,6 @@ const connectDB = async () => {
   }
 };
 
-connectDB();
-
 // return all customers
 app.get('/api/customers', async (req, res) => {
   try {
@@ -42,6 +40,7 @@ app.get('/api/customers', async (req, res) => {
   }
 });
 
+// check for validity of data prior to insert?
 app.post('/api/customers', async (req, res) => {
   if (req.headers['content-type'] != 'application/json') {
     res.status(416);
@@ -61,4 +60,7 @@ app.post('/api/customers', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Running on port: ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Running on port: ${PORT}`);
+  connectDB();
+});
