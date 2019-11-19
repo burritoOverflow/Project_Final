@@ -80,7 +80,7 @@ const deleteCustomer = async (customerID) => {
 };
 
 
-const listCustomers = customers => {
+const listCustomers = async (customers) => {
   const mainElement = document.body.querySelector('.customers-main');
   mainElement.innerHTML = templates.listCustomers({ customers });
 
@@ -89,8 +89,8 @@ const listCustomers = customers => {
     const deleteButton = deleteButtons[i];
     deleteButton.addEventListener('click', event => {
       deleteCustomer(deleteButton.getAttribute('customer-id'));
-      customers.splice(i, 1);
-      mainElement.innerHTML = templates.listCustomers({ customers });
+      const tr = deleteButton.parentNode.parentNode;
+      tr.parentNode.removeChild(tr);
     });
   }
 };
