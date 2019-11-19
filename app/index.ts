@@ -16,6 +16,22 @@ const fetchJSON = async (url, method = 'GET') => {
   }
 };
 
+const postJSON = async (url, data) => {
+  try {
+    const response = await fetch(url, {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    return response.json();
+  } catch (error) {
+    return { error };
+  }
+};
+
 const getCustomers = async () => {
   const customers = await fetchJSON('/api/customers');
   if (customers.error) {
@@ -24,6 +40,13 @@ const getCustomers = async () => {
   return customers;
 };
 
+const addCustomer = async (customer) => {
+  const resBody = await postJSON('/api/customers', customer);
+  if (resBody.error) {
+    throw resBody.error
+  }
+  return resBody;
+};
 
 const listCustomers = customers => {
   const mainElement = document.body.querySelector('.customers-main');
@@ -33,6 +56,22 @@ const listCustomers = customers => {
 const showCustomerForm = () => {
   const mainElement = document.body.querySelector('.customers-main');
   mainElement.innerHTML = templates.addCustomerForm();
+
+  const form = mainElement.querySelector('form');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const customerData = {
+      title: (<HTMLInputElement>form.querySelector('input[name = "title"]:checked')).value,
+      firstname: (<HTMLInputElement>form.querySelector('#firstname')).value,
+      lastname: (<HTMLInputElement>form.querySelector('#lastname')).value,
+      street: (<HTMLInputElement>form.querySelector('#street')).value,
+      city: (<HTMLInputElement>form.querySelector('#city')).value,
+      // state: document.getElementById("#state")
+      zip: (<HTMLInputElement>form.querySelector('#zip')).value,
+    }
+    addCustomer(customerData);
+  });
 }
 
 const showView = async () => {
@@ -50,6 +89,7 @@ const showView = async () => {
       break;
     case '#add-customer':
       showCustomerForm();
+      break;
     default:
       // Unrecognized view.
       throw Error(`Unrecognized view: ${view}`);
