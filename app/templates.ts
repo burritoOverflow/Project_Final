@@ -68,8 +68,8 @@ export const listCustomers = Handlebars.compile(`
             {{phone}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger" data-bundle-id="{{_id}}">Delete</button>
-            <button type="button" class="btn btn-warning" data-bundle-id="{{_id}}">Edit</button>
+            <button type="button" class="btn btn-danger delete" customer-id="{{_id}}">Delete</button>
+            <button type="button" class="btn btn-warning edit" customer-id="{{_id}}">Edit</button>
           </td>
         </tr>
         {{/each}}

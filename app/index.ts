@@ -19,12 +19,27 @@ const fetchJSON = async (url, method = 'GET') => {
 const postJSON = async (url, data) => {
   try {
     const response = await fetch(url, {
-      method: "post",
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
+    });
+    return response.json();
+  } catch (error) {
+    return { error };
+  }
+};
+
+const deleteFetchID = async (url, id) => {
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ _id: id })
     });
     return response.json();
   } catch (error) {
@@ -55,10 +70,27 @@ const addCustomer = async (customer) => {
   return resBody;
 };
 
+const deleteCustomer = async (customerID) => {
+  const resBody = await deleteFetchID('/api/customers/', customerID);
+  if (resBody.error) {
+    throw resBody.error
+  }
+  showAlert(`Customer "${customerID}" deleted!`, 'danger');
+  return resBody;
+};
+
 
 const listCustomers = customers => {
   const mainElement = document.body.querySelector('.customers-main');
   mainElement.innerHTML = templates.listCustomers({ customers });
+
+  const deleteButtons = mainElement.querySelectorAll('button.delete');
+  for (let i = 0; i < deleteButtons.length; i++) {
+    const deleteButton = deleteButtons[i];
+    deleteButton.addEventListener('click', event => {
+      deleteCustomer(deleteButton.getAttribute('customer-id'));
+    });
+  }
 };
 
 const showCustomerForm = () => {
