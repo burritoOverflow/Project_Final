@@ -38,6 +38,8 @@ export const listCustomers = Handlebars.compile(`
         <tr>
           <th>Name</th>
           <th>Address</th>
+          <th>E-Mail Address</th>
+          <th>Phone Number</th>
         </tr>
         {{#each customers}}
         <tr>
@@ -49,6 +51,12 @@ export const listCustomers = Handlebars.compile(`
           {{street}}
           {{city}}
           {{zip}}
+          </td>
+          <td>
+            {{email}}
+          </td>
+          <td>
+            {{phone}}
           </td>
           <td>
             <button type="button" class="btn btn-danger" data-bundle-id="{{_id}}">Delete</button>

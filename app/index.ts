@@ -66,6 +66,7 @@ const showCustomerForm = () => {
     let opt = state.options[selectedState];
     let stateVal = (<HTMLOptionElement>opt).value;
 
+
     const customerData = {
       title: (<HTMLInputElement>form.querySelector('input[name = "title"]:checked')).value,
       firstname: (<HTMLInputElement>form.querySelector('#firstname')).value,
@@ -76,6 +77,10 @@ const showCustomerForm = () => {
       zip: (<HTMLInputElement>form.querySelector('#zip')).value,
       email: (<HTMLInputElement>form.querySelector('#email')).value,
       phone: (<HTMLInputElement>form.querySelector('#phone')).value,
+      contactAny: (<HTMLInputElement>form.querySelector('#contactAny')).checked ? true : false,
+      contactMail: (<HTMLInputElement>form.querySelector('#contactMail')).checked ? true : false,
+      contactPhone: (<HTMLInputElement>form.querySelector('#contactPhone')).checked ? true : false,
+      contactEmail: (<HTMLInputElement>form.querySelector('#contactEmail')).checked ? true : false,
     }
     addCustomer(customerData);
   });
