@@ -1,0 +1,16 @@
+{
+  "name": "homeworkfinalproject",
+  "version": "1.0.0",
+  "description": "To run mongod as a MacOS service: ``` $ brew services start mongodb-community ```",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.3.4",
+    "morgan": "^1.9.1"
+  }
+}
