@@ -45,7 +45,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      title: 'Better Book Bundle Builder',
+      title: 'Customers Tracker',
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
