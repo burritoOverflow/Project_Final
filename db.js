@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 
 let db;
 
@@ -20,8 +20,13 @@ async function addCustomer(customer) {
   return result;
 }
 
+async function deleteCustomer(customerID) {
+  const result = await db.collection('customers').deleteOne({ _id: ObjectID(customerID)});
+  return result.deletedCount;
+}
+
 function getDb() {
   return db;
 }
 
-module.exports = { connectToDb, getCustomers, addCustomer, getDb };
+module.exports = { connectToDb, getCustomers, addCustomer, deleteCustomer, getDb };

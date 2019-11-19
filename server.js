@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8000;
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 const bodyParser = require('body-parser');
 
-const { connectToDb, getCustomers, addCustomer } = require('./db.js');
+const { connectToDb, getCustomers, addCustomer, deleteCustomer } = require('./db.js');
 
 
 const webpack = require('webpack');
@@ -40,7 +40,7 @@ app.post('/api/customers', async (req, res) => {
     res.end(JSON.stringify({status: 'incorrect content-type'}));
   }
   try {
-    const result = addCustomer(req.body);
+    const result = await addCustomer(req.body);
     res.status(201);
     const response = {
       resultID: `${result.insertedId}`
@@ -48,6 +48,18 @@ app.post('/api/customers', async (req, res) => {
     res.end(JSON.stringify(response));
   } catch (err) {
     res.status(500);
+    console.log(err);
+    res.end(JSON.stringify({ status: 'error' }));
+  }
+});
+
+app.delete('/api/customers/', async (req, res) => {
+  try {
+    const result = await deleteCustomer(req.body._id);
+    console.log(result);
+    res.status(202);
+    res.end(JSON.stringify({nDeleted: result}));
+  } catch (err) {
     console.log(err);
     res.end(JSON.stringify({ status: 'error' }));
   }
