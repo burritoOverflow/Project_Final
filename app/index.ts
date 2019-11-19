@@ -74,6 +74,8 @@ const showCustomerForm = () => {
       city: (<HTMLInputElement>form.querySelector('#city')).value,
       state: stateVal,
       zip: (<HTMLInputElement>form.querySelector('#zip')).value,
+      email: (<HTMLInputElement>form.querySelector('#email')).value,
+      phone: (<HTMLInputElement>form.querySelector('#phone')).value,
     }
     addCustomer(customerData);
   });

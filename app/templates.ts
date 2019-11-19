@@ -127,6 +127,16 @@ export const addCustomerForm = Handlebars.compile(`
         <input type="text" id="zip" name="zip" class="form-control" placeholder="90291" pattern="[0-9]{5}" title="five digit zip code" required>
       </div>
 
+      <div class="form-group col-md-6">
+          <label for="phone">Phone: </label>
+          <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="303-867-5309"
+              title="ten digit phone number">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="email">Email: </label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Hello@Wor.ld" required>
+      </div>
+
     <div class="form-group row">
     <div class="col-sm-2">Contact method: </div>
       <div class="col-sm-10">
