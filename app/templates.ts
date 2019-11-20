@@ -151,7 +151,7 @@ export const addCustomerForm = Handlebars.compile(`
       </div>
       <div class="form-group col-md-6">
           <label for="email">Email: </label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Hello@Wor.ld" required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Hello@Wor.ld" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
       </div>
 
     <div class="form-group row">
