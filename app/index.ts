@@ -96,8 +96,10 @@ const listCustomers =  customers => {
     const deleteButton = deleteButtons[i];
     deleteButton.addEventListener('click', event => {
       deleteCustomer(deleteButton.getAttribute('customer-id'));
-      const tr = deleteButton.parentNode.parentNode;
-      tr.parentNode.removeChild(tr);
+      // const tr = deleteButton.parentNode.parentNode;
+      // tr.parentNode.removeChild(tr);
+      window.location.hash = '';
+      window.location.hash = '#customers';
     });
   }
 };
@@ -142,6 +144,7 @@ const showView = async () => {
   switch (view) {
     case '#customers':
       removeAlerts();
+      console.log('Fired');
       try {
         const customers = await getCustomers();
         listCustomers(customers);
