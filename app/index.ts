@@ -71,6 +71,7 @@ const removeAlerts = () => {
 const addCustomer = async (customer) => {
   const resBody = await postJSON('/api/customers', customer);
   if (resBody.error) {
+    showAlert(`Customer "${customer.title} ${customer.firstname} ${customer.lastname}" creation failed!`, 'danger');
     throw resBody.error
   }
   showAlert(`Customer "${customer.title} ${customer.firstname} ${customer.lastname}" created!`, 'success');
@@ -80,9 +81,10 @@ const addCustomer = async (customer) => {
 const deleteCustomer = async (customerID) => {
   const resBody = await deleteFetchID('/api/customers/', customerID);
   if (resBody.error) {
+    showAlert(`"${customerID}" deletion failed!`, 'danger');
     throw resBody.error
   }
-  showAlert(`Customer "${customerID}" deleted!`, 'danger');
+  showAlert(`Customer "${customerID}" deleted!`, 'warning');
   return resBody;
 };
 
