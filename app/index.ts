@@ -134,6 +134,8 @@ const showCustomerForm = () => {
       contactEmail: (<HTMLInputElement>form.querySelector('#contactEmail')).checked ? true : false,
     }
     addCustomer(customerData);
+    window.location.hash = '';
+    window.location.hash = '#add-customer';
   });
 }
 
@@ -144,7 +146,6 @@ const showView = async () => {
   switch (view) {
     case '#customers':
       removeAlerts();
-      console.log('Fired');
       try {
         const customers = await getCustomers();
         listCustomers(customers);
