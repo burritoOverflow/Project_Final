@@ -87,7 +87,7 @@ const deleteCustomer = async (customerID) => {
 };
 
 
-const listCustomers = async (customers) => {
+const listCustomers =  customers => {
   const mainElement = document.body.querySelector('.customers-main');
   mainElement.innerHTML = templates.listCustomers({ customers });
 
