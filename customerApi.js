@@ -43,8 +43,8 @@ routes.delete('/customers', async (req, res) => {
         const result = await deleteCustomer(req.body._id);
         if (result !== 1) {
             // if delete fails for the id provided, 
-            // and it's not the result of an error, it's not existence is the cause,
-            // so we'll go with this
+            // and it's not the result of an error, the id doesn't exist in the database,
+            // so we'll go with this.
             res.status(404);
             res.end(JSON.stringify({ nDeleted: result }));
         }
