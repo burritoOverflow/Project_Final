@@ -6,7 +6,8 @@ const { getCustomers, addCustomer, deleteCustomer } = require('./db.js');
 const routes = new Router();
 routes.use(bodyParser.json());
 
-routes.get('/customers', async (req, res) => {
+routes.route('/customers')
+    .get(async (req, res) => {
     try {
         const result = await getCustomers();
         res.set('Content-Type', 'application/json');
@@ -16,10 +17,7 @@ routes.get('/customers', async (req, res) => {
         console.log(err);
         res.end(JSON.stringify({ status: "error" }));
     }
-});
-
-// check for validity of data prior to insert?
-routes.post('/customers', async (req, res) => {
+}).post(async (req, res) => {
     if (req.headers['content-type'] != 'application/json') {
         res.status(416);
         res.end(JSON.stringify({ status: 'incorrect content-type' }));
@@ -36,9 +34,7 @@ routes.post('/customers', async (req, res) => {
         console.log(err);
         res.end(JSON.stringify({ status: 'error' }));
     }
-});
-
-routes.delete('/customers', async (req, res) => {
+}).delete(async (req, res) => {
     try {
         const result = await deleteCustomer(req.body._id);
         if (result !== 1) {
