@@ -168,5 +168,5 @@ const showView = async () => {
 (async () => {
   document.body.innerHTML = templates.main();
   window.addEventListener('hashchange', showView);
-  showView().catch(err => window.location.hash = '#customers');
+  showView().catch(err => window.location.hash = '#add-customer');
 })();
